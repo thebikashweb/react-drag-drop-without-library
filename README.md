@@ -1,6 +1,6 @@
 ## React Drag and Drop without using any libraries
 
-## [Video Tutorial](https://youtu.be/UCmshCTeaec)
+## [Video Tutorial](https://youtu.be/CYKDtVZr_Jw)
 ## [Demo](https://bw-reactdnd.netlify.com)
 
 
