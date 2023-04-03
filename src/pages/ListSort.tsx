@@ -1,9 +1,6 @@
 import React from "react";
-import "./App.css";
-import { Link } from "react-router-dom";
-import MainRoutes from "./Routes";
 
-function App() {
+function ListSort() {
   const [fruitItems, setFruitItems] = React.useState([
     "Apple",
     "Banana",
@@ -48,14 +45,40 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__navigation">
-        <Link to="/">List sort without library</Link>
-        <Link to="/container-sort">Container sort without library</Link>
-        <Link to="/sort-dnd">Sort with ReactDnD</Link>
+      <h2>Fruit List</h2>
+
+      <div className="input-group">
+        <input
+          type="text"
+          name="fruitName"
+          placeholder="e.g Banana"
+          onChange={handleNameChange}
+        />
+        <button className="btn" onClick={handleAddItem}>
+          Add item
+        </button>
       </div>
-      <MainRoutes />
+
+      <div className="list-container">
+        <div className="list-container__left">
+          {fruitItems.map((item, index) => (
+            <div
+              key={index}
+              className="list-item"
+              draggable
+              onDragStart={(e) => (dragItem.current = index)}
+              onDragEnter={(e) => (dragOverItem.current = index)}
+              onDragEnd={handleSort}
+              onDragOver={(e) => e.preventDefault()}
+            >
+              <i className="fa-solid fa-bars"></i>
+              <h3>{item}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default ListSort;
