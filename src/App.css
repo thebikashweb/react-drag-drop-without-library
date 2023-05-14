@@ -47,7 +47,12 @@ body{
   padding:0px 20px;
   margin-top:15px;
   cursor:move;
-  
+  transition: all .2s ease-in-out;
+
+}
+.list-item:hover{
+  scale:1.01;
+
 }
 .list-item i{
   margin-right:20px;
