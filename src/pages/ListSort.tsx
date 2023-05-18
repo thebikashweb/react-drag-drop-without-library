@@ -59,23 +59,21 @@ function ListSort() {
         </button>
       </div>
 
-      <div className="list-container">
-        <div className="list-container__left">
-          {fruitItems.map((item, index) => (
-            <div
-              key={index}
-              className="list-item"
-              draggable
-              onDragStart={(e) => (dragItem.current = index)}
-              onDragEnter={(e) => (dragOverItem.current = index)}
-              onDragEnd={handleSort}
-              onDragOver={(e) => e.preventDefault()}
-            >
-              <i className="fa-solid fa-bars"></i>
-              <h3>{item}</h3>
-            </div>
-          ))}
-        </div>
+      <div className="list-sort">
+        {fruitItems.map((item, index) => (
+          <div
+            key={index}
+            className="list-item"
+            draggable
+            onDragStart={(e) => (dragItem.current = index)}
+            onDragEnter={(e) => (dragOverItem.current = index)}
+            onDragEnd={handleSort}
+            onDragOver={(e) => e.preventDefault()}
+          >
+            <i className="fa-solid fa-bars"></i>
+            <h3>{item}</h3>
+          </div>
+        ))}
       </div>
     </div>
   );
