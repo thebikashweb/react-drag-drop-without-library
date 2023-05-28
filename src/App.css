@@ -84,14 +84,11 @@ h3{
   display:flex;
   justify-content: center;
 }
-.container-sort__incomplete {
+.container-sort__column {
   flex:1;
   margin-right:10px;
-  
 }
-.container-sort__completed {
-  flex: 1;
-}
+
 .container-sort__items {
   border: 0.5px solid grey;
   min-height: 200px;
