@@ -8,92 +8,90 @@ type TodoType = {
   sortIndex: number;
 };
 
-const sampleTodos: Array<TodoType> = [
+const columns = {
+  incomplete: "Incomplete",
+  progress: "In progress",
+  completed: "Completed ",
+  onhold: "Cancelled",
+  another: "Just another column",
+};
+
+type Column = typeof columns;
+type ColumnType = keyof Column;
+
+const sampleTodos: TodoType[] = [
   {
     id: uuidv4(),
-    title: "Create a video ",
+    title: "Todo item 1",
     column: "incomplete",
     sortIndex: 1,
   },
   {
     id: uuidv4(),
-    title: "Edit video",
+    title: "Todo item 2",
     column: "incomplete",
     sortIndex: 2,
   },
   {
     id: uuidv4(),
-    title: "Publish video ",
+    title: "Todo item 3",
     column: "incomplete",
     sortIndex: 3,
   },
 ];
 
-const columns = {
-  incomplete: true,
-  progress: true,
-
-  completed: true,
-  another: true,
-};
-
-type Column = typeof columns;
-
-type ColumnType = keyof Column;
-
 function ContainerSort() {
   const [todoTitle, setTodoTitle] = React.useState("");
   const [todos, setTodos] = React.useState<TodoType[]>(sampleTodos);
 
+  const columnMap = Object.keys(columns) as Array<ColumnType>;
+
   const draggedTodoItem = React.useRef<any>(null);
 
   const handleAddTodo = () => {
-    if (!todoTitle) return;
     const todoPayload: TodoType = {
       id: uuidv4(),
       title: todoTitle,
       column: "incomplete",
-      sortIndex: todos.length + 1,
+      sortIndex: todos[todos.length + 1]?.sortIndex || todos.length + 1,
     };
-
-    setTodos((prev) => [...prev, todoPayload]);
+    setTodos([...todos, todoPayload]);
   };
 
-  const handleContainerDrag = (column: ColumnType) => {
+  const handleColumnDrop = (column: ColumnType) => {
     const index = todos.findIndex(
       (todo) => todo.id === draggedTodoItem.current
     );
     const tempTodos = [...todos];
     tempTodos[index].column = column;
-    setTodos([...tempTodos]);
+    setTodos(tempTodos);
   };
-
   return (
     <div className="container-sort">
       <div className="input-group">
         <input
           type="text"
-          name="todotitle"
+          name="fruitName"
           value={todoTitle}
-          placeholder="Enter a todo item"
+          placeholder="e.g make a video"
           onChange={(e) => setTodoTitle(e.target.value)}
         />
         <button className="btn" onClick={handleAddTodo}>
-          Add item
+          Add a todo item
         </button>
       </div>
 
       <div className="container-sort__wrapper">
-        {Object.keys(columns).map((key: any) => (
-          <div key={key} className={`container-sort__column`}>
-            <h5>{key.toLocaleUpperCase()} todos</h5>
+        {columnMap.map((column) => (
+          <div className="container-sort__column">
+            <h5>{columns[column]}</h5>
             <div
               className="container-sort__items"
               onDragOver={(e) => e.preventDefault()}
-              onDrop={() => handleContainerDrag(key)}
+              onDrop={(e) => handleColumnDrop(column)}
             >
               {todos
-                .filter((todo) => todo.column === key)
+                .filter((todo) => todo.column === column)
                 .map((todo) => (
                   <div
                     key={todo.id}
@@ -103,7 +101,7 @@ function ContainerSort() {
                     onDragOver={(e) => e.preventDefault()}
                   >
                     <i className="fa-solid fa-bars"></i>
-                    <h6>{todo.title}</h6>
+                    <h3>{todo.title}</h3>
                   </div>
                 ))}
             </div>
