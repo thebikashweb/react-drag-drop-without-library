@@ -14,6 +14,7 @@ const columns = {
   completed: "Completed ",
   onhold: "Cancelled",
   another: "Just another column",
+  example: "Another example",
 };
 
 type Column = typeof columns;
