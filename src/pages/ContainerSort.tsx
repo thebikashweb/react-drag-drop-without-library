@@ -1,14 +1,14 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-type TodoType = {
+export type TodoType = {
   id: string;
   title: string;
   column: ColumnType;
   sortIndex: number;
 };
 
-const columns = {
+export const columns = {
   incomplete: "Incomplete",
   progress: "In progress",
   completed: "Completed ",
@@ -18,7 +18,7 @@ const columns = {
 };
 
 type Column = typeof columns;
-type ColumnType = keyof Column;
+export type ColumnType = keyof Column;
 
 const sampleTodos: TodoType[] = [
   {

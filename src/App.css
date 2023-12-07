@@ -56,6 +56,15 @@ body{
   transition: all .2s ease-in-out;
 
 }
+.list-item-draggable{
+  display:flex;
+  align-items: center;
+  background-color: #FFD2D2;
+  padding:0px 20px;
+  margin-top:15px;
+  
+
+}
 .list-item:hover{
   scale:1.01;
 
